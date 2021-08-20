@@ -176,7 +176,6 @@ server <- function(input, output) {
     get_metrics_data <- reactive({
         req(input$metric)
         sfAllListingsData %>%
-            # filter(neighbourhood %in% input$neighbourhood) %>%
             group_by(room_type, date) %>%
             summarize_at(.vars = vars(input$metric),.funs = mean) %>% 
             mutate(date=as.Date(date)) %>% 
@@ -196,24 +195,6 @@ server <- function(input, output) {
                       y=input$metric,
                       title = input$metric)
         )
-            
-            # p2 <- ggplotly( ggplot(sfAllListingsData) + 
-            #     geom_boxplot(aes(neighbourhood, price, group = neighbourhood)) + 
-            #     ggtitle('Plot 2'))
-            # 
-            # ,
-            # 
-            # p3 <- ggplot(mtcars) + 
-            #     geom_point(aes(hp, wt, colour = mpg)) + 
-            #     ggtitle('Plot 3'),
-            # 
-            # p4 <- ggplot(mtcars) + 
-            #     geom_bar(aes(gear)) + 
-            #     facet_wrap(~cyl) + 
-            #     ggtitle('Plot 4'),
-            # 
-            #subplot(p1)
-    p1
         
     })
     
